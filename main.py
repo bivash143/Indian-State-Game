@@ -24,10 +24,7 @@ while len(user_ans_list) < no_of_states:
     user_ans = screen.textinput(title=f"Guess the State {no_of_correct_ans}/{no_of_states}", prompt="What's another State's name? ").title()
 
     if(user_ans == "Exit"):
-        missing_ans = []
-        for x in data["state"].to_list():
-            if(x not in user_ans_list):
-                missing_ans.append(x)
+        missing_ans = [x for x in data["state"].to_list() if x not in user_ans_list]
         missing_ans_dict = {"Missing States": missing_ans}
         df = pandas.DataFrame(missing_ans_dict)
         df.to_csv("states_to_learn.csv")
